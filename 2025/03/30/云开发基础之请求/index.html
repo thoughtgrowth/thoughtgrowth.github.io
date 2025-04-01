@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>云开发基础之请求 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="增删查改在页面展现云数据库的内容初始化在开始使用数据库 API 进行增删改查操作之前，需要先获取数据库的引用。以下调用获取默认环境的数据库的引用： 1const db &#x3D; wx.cloud.database()  连接数据库1const db&#x3D;wx.cloud.database()  连接那个数据库，“”中为数据库的名称 12345getData()&#123;  db.collection(&amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云开发基础之请求">
+<meta property="og:url" content="http://example.com/2025/03/30/%E4%BA%91%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%AF%B7%E6%B1%82/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="增删查改在页面展现云数据库的内容初始化在开始使用数据库 API 进行增删改查操作之前，需要先获取数据库的引用。以下调用获取默认环境的数据库的引用： 1const db &#x3D; wx.cloud.database()  连接数据库1const db&#x3D;wx.cloud.database()  连接那个数据库，“”中为数据库的名称 12345getData()&#123;  db.collection(&amp;q">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-27%20203213.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-29%20162623.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-29%20161034.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-29%20162040.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-29%20162531.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-29%20165317.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-29%20165303.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-29%20171005.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-29%20171016.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-29%20173216.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-30%20171551.png">
+<meta property="og:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-30%20171615.png">
+<meta property="article:published_time" content="2025-03-30T09:21:43.000Z">
+<meta property="article:modified_time" content="2025-04-01T03:40:20.895Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/03/30/image/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-27%20203213.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-云开发基础之请求" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/30/%E4%BA%91%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%AF%B7%E6%B1%82/" class="article-date">
+  <time class="dt-published" datetime="2025-03-30T09:21:43.000Z" itemprop="datePublished">2025-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      云开发基础之请求
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="增删查改"><a href="#增删查改" class="headerlink" title="增删查改"></a>增删查改</h2><h3 id="在页面展现云数据库的内容"><a href="#在页面展现云数据库的内容" class="headerlink" title="在页面展现云数据库的内容"></a>在页面展现云数据库的内容</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>在开始使用数据库 API 进行增删改查操作之前，需要先获取数据库的引用。以下调用获取默认环境的数据库的引用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> db = wx.<span class="property">cloud</span>.<span class="title function_">database</span>()</span><br></pre></td></tr></table></figure>
+
+<h4 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const db=wx.cloud.database()</span><br></pre></td></tr></table></figure>
+
+<p>连接那个数据库，“”中为数据库的名称</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getData()&#123;</span><br><span class="line"></span><br><span class="line">  db.collection(&quot;demolist&quot;)</span><br><span class="line"></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取一个记录的数据"><a href="#获取一个记录的数据" class="headerlink" title="获取一个记录的数据"></a>获取一个记录的数据</h4><p>我们先来看看如何获取一个记录的数据，假设我们已有一个 ID 为 <code>todo-identifiant-aleatoire</code> 的在集合 <code>todos</code> 上的记录，那么我们可以通过在该记录的引用调用 <code>get</code> 方法获取这个待办事项的数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="title function_">collection</span>(<span class="string">&#x27;todos&#x27;</span>).<span class="title function_">doc</span>(<span class="string">&#x27;todo-identifiant-aleatoire&#x27;</span>).<span class="title function_">get</span>(&#123;</span><br><span class="line">  <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">res</span>) &#123;</span><br><span class="line">    <span class="comment">// res.data 包含该记录的数据</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">data</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询指令"><a href="#查询指令" class="headerlink" title="查询指令"></a>查询指令</h3><p>使用数据库 API 提供的 <code>where</code>方法我们可以构造复杂的查询条件完成复杂的查询任务。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> _ = db.<span class="property">command</span></span><br><span class="line">db.<span class="title function_">collection</span>(<span class="string">&#x27;todos&#x27;</span>).<span class="title function_">where</span>(&#123;</span><br><span class="line">  <span class="comment">// gt 方法用于指定一个 &quot;大于&quot; 条件，此处 _.gt(30) 是一个 &quot;大于 30&quot; 的条件</span></span><br><span class="line">  <span class="attr">progress</span>: _.<span class="title function_">gt</span>(<span class="number">30</span>)</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">get</span>(&#123;</span><br><span class="line">  <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">res</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">data</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<img src="../image/屏幕截图 2025-03-27 203213.png" style="zoom:23%;" />
+
+<h3 id="添加数据到云数据库"><a href="#添加数据到云数据库" class="headerlink" title="添加数据到云数据库"></a>添加数据到云数据库</h3><h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//添加数据</span></span><br><span class="line">  <span class="title function_">addData</span>(<span class="params"></span>)&#123;</span><br><span class="line">    wx.<span class="title function_">showLoading</span>(&#123;</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&#x27;数据加载中...&#x27;</span>,</span><br><span class="line">      <span class="attr">mask</span>:<span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">    db.<span class="title function_">collection</span>(<span class="string">&quot;demolist&quot;</span>).<span class="title function_">add</span>(&#123;</span><br><span class="line">      <span class="attr">data</span>:&#123;</span><br><span class="line">        <span class="attr">title</span>:<span class="string">&quot;测试标题1&quot;</span>,</span><br><span class="line">        <span class="attr">author</span>:<span class="string">&quot;张三&quot;</span>,</span><br><span class="line">        <span class="attr">content</span>:<span class="string">&quot;测试的内容是什么你不好奇吗你好奇你好奇&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">      wx.<span class="title function_">hideLoading</span>()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<img src="../image/屏幕截图 2025-03-29 162623.png" style="zoom:50%;" />
+
+<img src="../image/屏幕截图 2025-03-29 161034.png" style="zoom:30%;" />
+
+<img src="../image/屏幕截图 2025-03-29 162040.png" style="zoom:33%;" />
+
+<img src="../image/屏幕截图 2025-03-29 162531.png" style="zoom:50%;" />
+
+<h3 id="更新云数据库的两种方法"><a href="#更新云数据库的两种方法" class="headerlink" title="更新云数据库的两种方法"></a>更新云数据库的两种方法</h3><p><code>update</code>	局部更新一个或多个记录使用 update 方法可以局部更新一个记录或一个集合中的记录，局部更新意味着只有指定的字段会得到更新，其他字段不受影响。如果需要更新多个数据，需在 Server 端进行操作（云函数），在 where 语句后同样的调用 update 方法即可<br><code>set</code>	替换更新一个记录 如果需要替换更新一条记录，可以在记录上使用 set 方法，替换更新意味着用传入的对象替换指定的记录,其他的就消失，只有重置的。如果指定 ID 的记录不存在，则会自动创建该记录，该记录将拥有指定的 ID。</p>
+<h4 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h4><img src="../image/屏幕截图 2025-03-29 165317.png" style="zoom:50%;" />
+
+<img src="../image/屏幕截图 2025-03-29 165303.png" style="zoom: 33%;" />
+
+<h4 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h4><img src="../image/屏幕截图 2025-03-29 171005.png" style="zoom:40%;" />
+
+<img src="../image/屏幕截图 2025-03-29 171016.png" style="zoom:30%;" />
+
+<h3 id="删除数据记录及表单是数据收集"><a href="#删除数据记录及表单是数据收集" class="headerlink" title="删除数据记录及表单是数据收集"></a>删除数据记录及表单是数据收集</h3><h4 id="删除一条记录"><a href="#删除一条记录" class="headerlink" title="删除一条记录"></a>删除一条记录</h4><p>对记录使用 <code>remove</code> 方法可以删除该条记录，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="title function_">collection</span>(<span class="string">&#x27;todos&#x27;</span>).<span class="title function_">doc</span>(<span class="string">&#x27;todo-identifiant-aleatoire&#x27;</span>).<span class="title function_">remove</span>(&#123;</span><br><span class="line">  <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">res</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">data</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button type=<span class="string">&quot;primary&quot;</span> <span class="attr">bind</span>:tap=<span class="string">&quot;delData&quot;</span>&gt;删除一条数据&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除记录</span></span><br><span class="line"> <span class="title function_">delData</span>(<span class="params"></span>)&#123;</span><br><span class="line">  db.<span class="title function_">collection</span>(<span class="string">&quot;demolist&quot;</span>)</span><br><span class="line">  .<span class="title function_">doc</span>(<span class="string">&quot;80a8bd4f67e7ad0f001fc54923ead214&quot;</span>)</span><br><span class="line">  .<span class="title function_">remove</span>()</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">  &#125;)</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>可以定义一个全局变量</p>
+<img src="../image/屏幕截图 2025-03-29 173216.png" style="zoom:33%;" />
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input placeholder=<span class="string">&quot;请输入id&quot;</span>bindinput=<span class="string">&quot;myIpt&quot;</span>&gt;&lt;/input&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">bind:tap</span>=<span class="string">&quot;delData&quot;</span>&gt;</span>删除一条数据<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取输入的内容</span></span><br><span class="line"> <span class="title function_">myIpt</span>(<span class="params">res</span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> vlu=res.<span class="property">detail</span>.<span class="property">value</span>;</span><br><span class="line">  myVlu=vlu    </span><br><span class="line"> &#125;,</span><br><span class="line"> <span class="comment">//删除记录</span></span><br><span class="line"> <span class="title function_">delData</span>(<span class="params"></span>)&#123;</span><br><span class="line">  db.<span class="title function_">collection</span>(<span class="string">&quot;demolist&quot;</span>)</span><br><span class="line">  .<span class="title function_">doc</span>(myVlu)</span><br><span class="line">  .<span class="title function_">remove</span>()</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">  &#125;)</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="count个数与watch数据监听"><a href="#count个数与watch数据监听" class="headerlink" title="count个数与watch数据监听"></a>count个数与watch数据监听</h3><h4 id="查询数据个数"><a href="#查询数据个数" class="headerlink" title="查询数据个数"></a>查询数据个数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button type=<span class="string">&quot;primary&quot;</span> <span class="attr">bind</span>:tap=<span class="string">&quot;btnNum&quot;</span>&gt;查询个数&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取记录格式</span></span><br><span class="line">  <span class="title function_">btnNum</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//db.collection(&quot;demolist&quot;).get().then(res=&gt;&#123;</span></span><br><span class="line">      <span class="comment">//console.log(res)</span></span><br><span class="line">    <span class="comment">//&#125;)</span></span><br><span class="line">    db.<span class="title function_">collection</span>(<span class="string">&quot;demolist&quot;</span>).<span class="title function_">count</span>()</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>默认值</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>onChange</code></td>
+<td>function</td>
+<td></td>
+<td>是</td>
+<td>成功回调，回调传入的参数 snapshot 是变更快照，snapshot 定义见下方</td>
+</tr>
+<tr>
+<td><code>onError</code></td>
+<td>function</td>
+<td></td>
+<td>是</td>
+<td>失败回调</td>
+</tr>
+</tbody></table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">   * 生命周期函数--监听页面加载</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">       <span class="title function_">onLoad</span>(<span class="params">options</span>) &#123;</span><br><span class="line"></span><br><span class="line">    db.<span class="title function_">collection</span>(<span class="string">&quot;demolist&quot;</span>).<span class="title function_">watch</span>(&#123;</span><br><span class="line">      <span class="attr">onChange</span>:<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">onError</span>:<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<img src="../image/屏幕截图 2025-03-30 171551.png" style="zoom:45%;" />
+
+<img src="../image/屏幕截图 2025-03-30 171615.png" style="zoom:50%;" />
+
+<h3 id="构建查询条件"><a href="#构建查询条件" class="headerlink" title="构建查询条件"></a>构建查询条件</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/03/30/%E4%BA%91%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%AF%B7%E6%B1%82/" data-id="cm8xyapk60000l0lobzpx2a0x" data-title="云开发基础之请求" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2025/03/30/es6%E4%B9%8Bpromise/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">es6之promise</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/03/30/%E4%BA%91%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%AF%B7%E6%B1%82/">云开发基础之请求</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/30/es6%E4%B9%8Bpromise/">es6之promise</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/23/text3/">text3</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/23/text4/">text4</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/18/text2/">text2</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
